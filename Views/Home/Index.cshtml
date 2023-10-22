@@ -1,0 +1,46 @@
+﻿@using SmallFormApp.Models
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Ürün Listesi</h2>
+<br />
+<table class="table table-sm table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>is Approved</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {    
+        <tr>
+            <td>@p.Name</td>
+            <td>@p.Price</td>
+            <td>
+             @if(@p.isApproved)
+                    {
+                        <span class="badge rounded-pill bg-success">Onaylanmış</span>
+
+                    }
+             else
+                    {
+                        <span class="badge rounded-pill bg-danger">Onaylanmadı</span>
+                    }
+                </td>
+            
+            <td>
+                    <a class="btn btn-danger btn-sm" asp-controller="Home" asp-action="Edit" asp-route-id="@p.Id">Update</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+
+</table>
+
+<a class="btn btn-warning" asp-controller="Home" asp-action="Create">Create</a>
